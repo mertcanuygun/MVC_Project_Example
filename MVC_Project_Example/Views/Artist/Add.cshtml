@@ -1,0 +1,39 @@
+﻿@model MVC_Project_Example.Models.DTO.ArtistCreateDTO
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-sm-6">
+            <div class="card card-blue">
+                <div class="card-header">
+                    <h2 class="card-title">Create Artist</h2>
+                </div>
+                @using (Html.BeginForm("Add", "Artist", FormMethod.Post))
+                {
+                    <div class="card-body">
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.FirstName)
+                            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "Artist First Name" })
+                            @Html.ValidationMessageFor(x => x.FirstName)
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(x => x.LastName)
+                            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Artist Last Name" })
+                            @Html.ValidationMessageFor(x => x.LastName)
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary float-right">Submit</button>
+                        </div>
+                    </div>
+                }
+                <div class="card-footer">
+                    @Html.ActionLink("Back To List", "List", "Category", new { @class = "btn btn-warning btn-block" })
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

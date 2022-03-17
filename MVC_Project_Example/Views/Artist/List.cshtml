@@ -1,0 +1,58 @@
+﻿@model IEnumerable<MVC_Project_Example.Models.VM.ArtistVM>
+@{
+    ViewBag.Title = "List";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card card-gray-dark">
+            <div class="card-header">
+                <h5 class="card-title">Artist List</h5>
+            </div>
+            <div class="card-body">
+                <div class="table table-responsive table-sm">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>FirstName</th>
+                                <th>LastName</th>
+                                <th>Details</th>
+                                <th>Update</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Id</td>
+                                    <td>@item.FirstName</td>
+                                    <td>@item.LastName</td>
+                                    <td>
+                                        <a href=" /Artist/Details/@item.Id" class="btn btn-sm btn-info">Details</a>
+                                    </td>
+                                    <td>
+                                        <a href=" /Artist/Update/@item.Id" class="btn btn-sm btn-warning">Update</a>
+                                    </td>
+                                    <td>
+                                        <a href=" /Artist/Delete/@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot></tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="/Artist/Add" class="btn btn-default btn-block">Create A New One</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

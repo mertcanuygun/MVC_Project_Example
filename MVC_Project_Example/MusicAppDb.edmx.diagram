@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1f314e3ecde94899a9b365d144858242" Name="Diagram1">
+        <EntityTypeShape EntityType="MusicAppDbModel.C__MigrationHistory" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicAppDbModel.Album" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicAppDbModel.AppUser" Width="1.5" PointX="7.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicAppDbModel.Artist" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicAppDbModel.PlayList_Song" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicAppDbModel.PlayList" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MusicAppDbModel.Song" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="MusicAppDbModel.FK_dbo_Albums_dbo_Artists_ArtistId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicAppDbModel.FK_dbo_Songs_dbo_Albums_AlbumId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicAppDbModel.FK_dbo_Songs_dbo_Artists_ArtistId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicAppDbModel.FK_dbo_PlayList_Song_dbo_PlayLists_PlayListId" ManuallyRouted="false" />
+        <AssociationConnector Association="MusicAppDbModel.FK_dbo_PlayList_Song_dbo_Songs_SongId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,515 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MusicAppDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ContextKey" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Albums">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="TotalTrack" Type="int" Nullable="false" />
+          <Property Name="ReleaseDate" Type="datetime" />
+          <Property Name="ArtistId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AppUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="PassWord" Type="nvarchar(max)" />
+          <Property Name="Role" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Artists">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Picture" Type="nvarchar(max)" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayList_Song">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SongId" Type="int" Nullable="false" />
+          <Property Name="PlayListId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlayLists">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="TrackAmount" Type="int" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Songs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SongName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Length" Type="float" Nullable="false" />
+          <Property Name="TrackNo" Type="int" Nullable="false" />
+          <Property Name="SongWriter" Type="nvarchar(max)" />
+          <Property Name="Genre" Type="nvarchar(max)" />
+          <Property Name="ArtistId" Type="int" Nullable="false" />
+          <Property Name="AlbumId" Type="int" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="DeleteDate" Type="datetime" />
+          <Property Name="Status" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_Albums_dbo_Artists_ArtistId">
+          <End Role="Artists" Type="Self.Artists" Multiplicity="1" />
+          <End Role="Albums" Type="Self.Albums" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Albums">
+              <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PlayList_Song_dbo_PlayLists_PlayListId">
+          <End Role="PlayLists" Type="Self.PlayLists" Multiplicity="1" />
+          <End Role="PlayList_Song" Type="Self.PlayList_Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayLists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayList_Song">
+              <PropertyRef Name="PlayListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PlayList_Song_dbo_Songs_SongId">
+          <End Role="Songs" Type="Self.Songs" Multiplicity="1" />
+          <End Role="PlayList_Song" Type="Self.PlayList_Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayList_Song">
+              <PropertyRef Name="SongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Songs_dbo_Albums_AlbumId">
+          <End Role="Albums" Type="Self.Albums" Multiplicity="1" />
+          <End Role="Songs" Type="Self.Songs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Albums">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Songs">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Songs_dbo_Artists_ArtistId">
+          <End Role="Artists" Type="Self.Artists" Multiplicity="1" />
+          <End Role="Songs" Type="Self.Songs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Songs">
+              <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MusicAppDbModelStoreContainer">
+          <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Albums" EntityType="Self.Albums" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppUsers" EntityType="Self.AppUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Artists" EntityType="Self.Artists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayList_Song" EntityType="Self.PlayList_Song" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlayLists" EntityType="Self.PlayLists" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Songs" EntityType="Self.Songs" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_Albums_dbo_Artists_ArtistId" Association="Self.FK_dbo_Albums_dbo_Artists_ArtistId">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="Albums" EntitySet="Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PlayList_Song_dbo_PlayLists_PlayListId" Association="Self.FK_dbo_PlayList_Song_dbo_PlayLists_PlayListId">
+            <End Role="PlayLists" EntitySet="PlayLists" />
+            <End Role="PlayList_Song" EntitySet="PlayList_Song" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PlayList_Song_dbo_Songs_SongId" Association="Self.FK_dbo_PlayList_Song_dbo_Songs_SongId">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="PlayList_Song" EntitySet="PlayList_Song" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Songs_dbo_Albums_AlbumId" Association="Self.FK_dbo_Songs_dbo_Albums_AlbumId">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Songs_dbo_Artists_ArtistId" Association="Self.FK_dbo_Songs_dbo_Artists_ArtistId">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MusicAppDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C__MigrationHistory">
+          <Key>
+            <PropertyRef Name="MigrationId" />
+            <PropertyRef Name="ContextKey" />
+          </Key>
+          <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+          <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Album">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TotalTrack" Type="Int32" Nullable="false" />
+          <Property Name="ReleaseDate" Type="DateTime" Precision="3" />
+          <Property Name="ArtistId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Artist" Relationship="Self.FK_dbo_Albums_dbo_Artists_ArtistId" FromRole="Albums" ToRole="Artists" />
+          <NavigationProperty Name="Songs" Relationship="Self.FK_dbo_Songs_dbo_Albums_AlbumId" FromRole="Albums" ToRole="Songs" />
+        </EntityType>
+        <EntityType Name="AppUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PassWord" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Artist">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Picture" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Albums" Relationship="Self.FK_dbo_Albums_dbo_Artists_ArtistId" FromRole="Artists" ToRole="Albums" />
+          <NavigationProperty Name="Songs" Relationship="Self.FK_dbo_Songs_dbo_Artists_ArtistId" FromRole="Artists" ToRole="Songs" />
+        </EntityType>
+        <EntityType Name="PlayList_Song">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SongId" Type="Int32" Nullable="false" />
+          <Property Name="PlayListId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PlayList" Relationship="Self.FK_dbo_PlayList_Song_dbo_PlayLists_PlayListId" FromRole="PlayList_Song" ToRole="PlayLists" />
+          <NavigationProperty Name="Song" Relationship="Self.FK_dbo_PlayList_Song_dbo_Songs_SongId" FromRole="PlayList_Song" ToRole="Songs" />
+        </EntityType>
+        <EntityType Name="PlayList">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TrackAmount" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PlayList_Song" Relationship="Self.FK_dbo_PlayList_Song_dbo_PlayLists_PlayListId" FromRole="PlayLists" ToRole="PlayList_Song" />
+        </EntityType>
+        <EntityType Name="Song">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SongName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Length" Type="Double" Nullable="false" />
+          <Property Name="TrackNo" Type="Int32" Nullable="false" />
+          <Property Name="SongWriter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Genre" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ArtistId" Type="Int32" Nullable="false" />
+          <Property Name="AlbumId" Type="Int32" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="DeleteDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Album" Relationship="Self.FK_dbo_Songs_dbo_Albums_AlbumId" FromRole="Songs" ToRole="Albums" />
+          <NavigationProperty Name="Artist" Relationship="Self.FK_dbo_Songs_dbo_Artists_ArtistId" FromRole="Songs" ToRole="Artists" />
+          <NavigationProperty Name="PlayList_Song" Relationship="Self.FK_dbo_PlayList_Song_dbo_Songs_SongId" FromRole="Songs" ToRole="PlayList_Song" />
+        </EntityType>
+        <Association Name="FK_dbo_Albums_dbo_Artists_ArtistId">
+          <End Role="Artists" Type="Self.Artist" Multiplicity="1" />
+          <End Role="Albums" Type="Self.Album" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Albums">
+              <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Songs_dbo_Albums_AlbumId">
+          <End Role="Albums" Type="Self.Album" Multiplicity="1" />
+          <End Role="Songs" Type="Self.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Albums">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Songs">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_Songs_dbo_Artists_ArtistId">
+          <End Role="Artists" Type="Self.Artist" Multiplicity="1" />
+          <End Role="Songs" Type="Self.Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Artists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Songs">
+              <PropertyRef Name="ArtistId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PlayList_Song_dbo_PlayLists_PlayListId">
+          <End Role="PlayLists" Type="Self.PlayList" Multiplicity="1" />
+          <End Role="PlayList_Song" Type="Self.PlayList_Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PlayLists">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayList_Song">
+              <PropertyRef Name="PlayListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_PlayList_Song_dbo_Songs_SongId">
+          <End Role="Songs" Type="Self.Song" Multiplicity="1" />
+          <End Role="PlayList_Song" Type="Self.PlayList_Song" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Songs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PlayList_Song">
+              <PropertyRef Name="SongId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MusicAppDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+          <EntitySet Name="Albums" EntityType="Self.Album" />
+          <EntitySet Name="AppUsers" EntityType="Self.AppUser" />
+          <EntitySet Name="Artists" EntityType="Self.Artist" />
+          <EntitySet Name="PlayList_Song" EntityType="Self.PlayList_Song" />
+          <EntitySet Name="PlayLists" EntityType="Self.PlayList" />
+          <EntitySet Name="Songs" EntityType="Self.Song" />
+          <AssociationSet Name="FK_dbo_Albums_dbo_Artists_ArtistId" Association="Self.FK_dbo_Albums_dbo_Artists_ArtistId">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="Albums" EntitySet="Albums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Songs_dbo_Albums_AlbumId" Association="Self.FK_dbo_Songs_dbo_Albums_AlbumId">
+            <End Role="Albums" EntitySet="Albums" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_Songs_dbo_Artists_ArtistId" Association="Self.FK_dbo_Songs_dbo_Artists_ArtistId">
+            <End Role="Artists" EntitySet="Artists" />
+            <End Role="Songs" EntitySet="Songs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PlayList_Song_dbo_PlayLists_PlayListId" Association="Self.FK_dbo_PlayList_Song_dbo_PlayLists_PlayListId">
+            <End Role="PlayLists" EntitySet="PlayLists" />
+            <End Role="PlayList_Song" EntitySet="PlayList_Song" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_PlayList_Song_dbo_Songs_SongId" Association="Self.FK_dbo_PlayList_Song_dbo_Songs_SongId">
+            <End Role="Songs" EntitySet="Songs" />
+            <End Role="PlayList_Song" EntitySet="PlayList_Song" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MusicAppDbModelStoreContainer" CdmEntityContainer="MusicAppDbEntities">
+          <EntitySetMapping Name="C__MigrationHistory">
+            <EntityTypeMapping TypeName="MusicAppDbModel.C__MigrationHistory">
+              <MappingFragment StoreEntitySet="__MigrationHistory">
+                <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+                <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Albums">
+            <EntityTypeMapping TypeName="MusicAppDbModel.Album">
+              <MappingFragment StoreEntitySet="Albums">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TotalTrack" ColumnName="TotalTrack" />
+                <ScalarProperty Name="ReleaseDate" ColumnName="ReleaseDate" />
+                <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppUsers">
+            <EntityTypeMapping TypeName="MusicAppDbModel.AppUser">
+              <MappingFragment StoreEntitySet="AppUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Artists">
+            <EntityTypeMapping TypeName="MusicAppDbModel.Artist">
+              <MappingFragment StoreEntitySet="Artists">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayList_Song">
+            <EntityTypeMapping TypeName="MusicAppDbModel.PlayList_Song">
+              <MappingFragment StoreEntitySet="PlayList_Song">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SongId" ColumnName="SongId" />
+                <ScalarProperty Name="PlayListId" ColumnName="PlayListId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlayLists">
+            <EntityTypeMapping TypeName="MusicAppDbModel.PlayList">
+              <MappingFragment StoreEntitySet="PlayLists">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TrackAmount" ColumnName="TrackAmount" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Songs">
+            <EntityTypeMapping TypeName="MusicAppDbModel.Song">
+              <MappingFragment StoreEntitySet="Songs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SongName" ColumnName="SongName" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="TrackNo" ColumnName="TrackNo" />
+                <ScalarProperty Name="SongWriter" ColumnName="SongWriter" />
+                <ScalarProperty Name="Genre" ColumnName="Genre" />
+                <ScalarProperty Name="ArtistId" ColumnName="ArtistId" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="DeleteDate" ColumnName="DeleteDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
