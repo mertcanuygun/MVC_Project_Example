@@ -56,7 +56,10 @@ namespace MVC_Project_Example.Controllers
             artistVM.FirstName = artist.FirstName;
             artistVM.LastName = artist.LastName;
             artistVM.CreateDate = artist.CreateDate;
-            artistVM.Status = 1;
+            artistVM.UpdateDate = artist.UpdateDate;
+            artistVM.DeleteDate = artist.DeleteDate;
+            artistVM.Status = artist.Status;
+
             
             return View(artistVM);
         }
@@ -75,13 +78,12 @@ namespace MVC_Project_Example.Controllers
         }
 
         [HttpPost]
-        public ActionResult Update(ArtistUpdateDTO model)
+        public ActionResult Update(ArtistUpdateDTO artistUpdateDTO)
         {
-            Artist artist = artistRepository.GetEntity(x=> x.Id == model.Id);
+            Artist artist = artistRepository.GetEntity(x=> x.Id == artistUpdateDTO.Id);
             
-            artist.FirstName = model.FirstName;
-            artist.LastName = model.LastName;
-            artist.UpdateDate = DateTime.Now;
+            artist.FirstName = artistUpdateDTO.FirstName;
+            artist.LastName = artistUpdateDTO.LastName;
             artist.Status = 1;
 
             artistRepository.Update(artist);
@@ -110,6 +112,7 @@ namespace MVC_Project_Example.Controllers
                                              FirstName = x.FirstName,
                                              LastName = x.LastName,
                                              DeleteDate = DateTime.Now,
+                                             Status = x.Status
                                          });
             return View(artists);
         }

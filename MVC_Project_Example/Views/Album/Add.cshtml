@@ -1,0 +1,40 @@
+﻿@model MVC_Project_Example.Models.DTO.AlbumCreateDTO
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Views/Shared/_LayoutPage.cshtml";
+}
+
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-sm-6">
+            <div class="card card-blue">
+                <div class="card-header">
+                    <h2 class="card-title">Create Album</h2>
+                </div>
+                <form method="post" action="/Album/Add">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Album Name</label>
+                            <input type="text" name="Name" class="form-control" placeholder="Album Name">
+                        </div>
+                        <div class="form-group">
+                            <label>Total Track</label>
+                            <input type="number" name="TotalTrack" class="form-control" placeholder="Total Track">
+                        </div>
+                        <div class="form-group">
+                            <label>Artist Id</label>
+                            <input type="number" name="ArtistId" class="form-control" placeholder="Artist Id">
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary float-right">Submit</button>
+                    </div>
+                </form>               
+                <div class="card-footer">
+                    <a href="/Album/List" class="btn btn-default btn-block">Back to List</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

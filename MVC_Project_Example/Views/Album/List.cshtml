@@ -1,15 +1,14 @@
-﻿@model IEnumerable<MVC_Project_Example.Models.VM.ArtistVM>
+﻿@model  IEnumerable<MVC_Project_Example.Models.VM.AlbumVM>
 @{
-    ViewBag.Title = "DeletedItems";
+    ViewBag.Title = "List";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
-
 
 <div class="row">
     <div class="col-sm-12">
         <div class="card card-gray-dark">
             <div class="card-header">
-                <h5 class="card-title">Artist List</h5>
+                <h5 class="card-title">Album List</h5>
             </div>
             <div class="card-body">
                 <div class="table table-responsive table-sm">
@@ -17,11 +16,12 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>FirstName</th>
-                                <th>LastName</th>
-                                <th>Status</th>
+                                <th>Album Title</th>
+                                <th>Artist Id</th>
+                                <th>Total Track</th>
                                 <th>Details</th>
                                 <th>Update</th>
+                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -29,15 +29,18 @@
                             {
                                 <tr>
                                     <td>@item.Id</td>
-                                    <td>@item.FirstName</td>
-                                    <td>@item.LastName</td>
-                                    <td>@item.Status</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.ArtistId</td>
+                                    <td>@item.TotalTrack</td>
                                     <td>
-                                        <a href=" /Artist/Details/@item.Id" class="btn btn-sm btn-info">Details</a>
+                                        <a href=" /Album/Details/@item.Id" class="btn btn-sm btn-info">Details</a>
                                     </td>
                                     <td>
-                                        <a href=" /Artist/Update/@item.Id" class="btn btn-sm btn-warning">Update</a>
-                                    </td>                                  
+                                        <a href=" /Album/Update/@item.Id" class="btn btn-sm btn-warning">Update</a>
+                                    </td>
+                                    <td>
+                                        <a href=" /Album/Delete/@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                                    </td>
                                 </tr>
                             }
                         </tbody>
@@ -46,13 +49,10 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a href="/Artist/List" class="btn btn-default btn-block">Go Back to Active Artists</a>
+                <a href="/Album/Add" class="btn btn-default btn-block">Create A New One</a>
             </div>
         </div>
     </div>
 </div>
-
-
-
 
 

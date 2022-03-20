@@ -131,18 +131,22 @@
     <Compile Include="Artist.cs">
       <DependentUpon>MusicAppDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\ArtistController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="C__MigrationHistory.cs">
       <DependentUpon>MusicAppDb.tt</DependentUpon>
     </Compile>
+    <Compile Include="DataAccess\Repositories\EntityType\AlbumRepository.cs" />
     <Compile Include="DataAccess\Repositories\EntityType\ArtistRepository.cs" />
     <Compile Include="DataAccess\Repositories\IBaseRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DTO\AlbumCreateDTO.cs" />
     <Compile Include="Models\DTO\ArtistCreateDTO.cs" />
     <Compile Include="Models\DTO\ArtistUpdateDTO.cs" />
+    <Compile Include="Models\VM\AlbumVM.cs" />
     <Compile Include="Models\VM\ArtistVM.cs" />
     <Compile Include="MusicAppDb.Context.cs">
       <AutoGen>True</AutoGen>
@@ -190,6 +194,9 @@
     <Content Include="Views\Shared\Partial\_MainSideBar.cshtml" />
     <Content Include="Views\Shared\Partial\_MainHeader.cshtml" />
     <Content Include="Views\Artist\DeletedItems.cshtml" />
+    <Content Include="Views\Album\Add.cshtml" />
+    <Content Include="Views\Album\List.cshtml" />
+    <Content Include="Views\Album\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

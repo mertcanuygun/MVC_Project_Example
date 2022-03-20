@@ -6,7 +6,7 @@ using System.Web;
 
 namespace MVC_Project_Example.Models.DTO
 {
-    public class ArtistUpdateDTO:Artist
+    public class ArtistUpdateDTO
     {
         public int Id { get; set; }
 
