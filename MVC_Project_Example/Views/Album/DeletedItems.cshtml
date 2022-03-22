@@ -1,6 +1,6 @@
-﻿@model  IEnumerable<MVC_Project_Example.Models.VM.AlbumVM>
+﻿@model IEnumerable<MVC_Project_Example.Models.VM.AlbumVM>
 @{
-    ViewBag.Title = "List";
+    ViewBag.Title = "DeletedItems";
     Layout = "~/Views/Shared/_LayoutPage.cshtml";
 }
 
@@ -17,11 +17,10 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Album Title</th>
-                                <th>Artist Name</th>
                                 <th>Total Track</th>
+                                <th>Status</th>
                                 <th>Details</th>
                                 <th>Update</th>
-                                <th>Delete</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -31,15 +30,12 @@
                                     <td>@item.Id</td>
                                     <td>@item.Name</td>
                                     <td>@item.ArtistName</td>
-                                    <td>@item.TotalTrack</td>
+                                    <td>@item.Status</td>
                                     <td>
                                         <a href=" /Album/Details/@item.Id" class="btn btn-sm btn-info">Details</a>
                                     </td>
                                     <td>
                                         <a href=" /Album/Update/@item.Id" class="btn btn-sm btn-warning">Update</a>
-                                    </td>
-                                    <td>
-                                        <a href=" /Album/Delete/@item.Id" class="btn btn-sm btn-danger">Delete</a>
                                     </td>
                                 </tr>
                             }
@@ -49,7 +45,7 @@
                 </div>
             </div>
             <div class="card-footer">
-                <a href="/Album/Add" class="btn btn-default btn-block">Create A New One</a>
+                <a href="/Album/List" class="btn btn-default btn-block">Go Back to Active Albums</a>
             </div>
         </div>
     </div>

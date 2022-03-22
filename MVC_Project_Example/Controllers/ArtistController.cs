@@ -80,15 +80,23 @@ namespace MVC_Project_Example.Controllers
         [HttpPost]
         public ActionResult Update(ArtistUpdateDTO artistUpdateDTO)
         {
-            Artist artist = artistRepository.GetEntity(x=> x.Id == artistUpdateDTO.Id);
+            if (ModelState.IsValid)
+            {
+                Artist artist = artistRepository.GetEntity(x => x.Id == artistUpdateDTO.Id);
+
+                artist.FirstName = artistUpdateDTO.FirstName;
+                artist.LastName = artistUpdateDTO.LastName;
+                artist.Status = 1;
+
+                artistRepository.Update(artist);
+
+                return RedirectToAction("List");
+            }
+            else
+            {
+                return View(artistUpdateDTO);
+            }
             
-            artist.FirstName = artistUpdateDTO.FirstName;
-            artist.LastName = artistUpdateDTO.LastName;
-            artist.Status = 1;
-
-            artistRepository.Update(artist);
-
-            return RedirectToAction("List");
         }
         public ActionResult Delete(int id)
         {

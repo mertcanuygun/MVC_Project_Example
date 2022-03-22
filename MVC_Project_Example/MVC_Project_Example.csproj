@@ -144,8 +144,10 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DTO\AlbumCreateDTO.cs" />
+    <Compile Include="Models\DTO\AlbumUpdateDTO.cs" />
     <Compile Include="Models\DTO\ArtistCreateDTO.cs" />
     <Compile Include="Models\DTO\ArtistUpdateDTO.cs" />
+    <Compile Include="Models\VM\AlbumDetailsVM.cs" />
     <Compile Include="Models\VM\AlbumVM.cs" />
     <Compile Include="Models\VM\ArtistVM.cs" />
     <Compile Include="MusicAppDb.Context.cs">
@@ -197,6 +199,8 @@
     <Content Include="Views\Album\Add.cshtml" />
     <Content Include="Views\Album\List.cshtml" />
     <Content Include="Views\Album\Details.cshtml" />
+    <Content Include="Views\Album\Update.cshtml" />
+    <Content Include="Views\Album\DeletedItems.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

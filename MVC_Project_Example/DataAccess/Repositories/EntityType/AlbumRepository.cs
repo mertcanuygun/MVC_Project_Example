@@ -34,6 +34,7 @@ namespace MVC_Project_Example.DataAccess.Repositories.EntityType
 
         public void Update(Album entity)
         {
+            entity.UpdateDate = DateTime.Now;
             db.SaveChanges();
         }
     }

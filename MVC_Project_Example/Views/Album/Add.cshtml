@@ -14,16 +14,21 @@
                 <form method="post" action="/Album/Add">
                     <div class="card-body">
                         <div class="form-group">
-                            <label>Album Name</label>
-                            <input type="text" name="Name" class="form-control" placeholder="Album Name">
+                            <label>Album Title</label>
+                            <input type="text" name="Name" class="form-control" placeholder="Album Title">
                         </div>
                         <div class="form-group">
                             <label>Total Track</label>
                             <input type="number" name="TotalTrack" class="form-control" placeholder="Total Track">
                         </div>
                         <div class="form-group">
-                            <label>Artist Id</label>
-                            <input type="number" name="ArtistId" class="form-control" placeholder="Artist Id">
+                            <label>Choose Artist</label>
+                            <select name="ArtistId" class="form-control">
+                                @foreach (var item in Model.Artists)
+                                {
+                                    <option value="@item.Id">@item.FirstName @item.LastName</option>
+                                }
+                            </select>
                         </div>
                     </div>
                     <div class="card-footer">

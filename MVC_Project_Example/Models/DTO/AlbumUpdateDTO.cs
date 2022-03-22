@@ -7,13 +7,14 @@ using System.Web;
 
 namespace MVC_Project_Example.Models.DTO
 {
-    public class AlbumCreateDTO
+    public class AlbumUpdateDTO
     {
         [Required(ErrorMessage = "Please type into artist name")]
         public string Name { get; set; }
 
         [RegularExpression(@"[1-500]+$", ErrorMessage = "Only numbers are allowed")]
         public int TotalTrack { get; set; }
+        public int Id { get; set; }
 
         [RegularExpression(@"[1-500]+$", ErrorMessage = "Only numbers are allowed")]
         public int ArtistId { get; set; }

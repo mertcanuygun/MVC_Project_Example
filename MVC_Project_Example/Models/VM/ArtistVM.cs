@@ -5,13 +5,14 @@ using System.Web;
 
 namespace MVC_Project_Example.Models.VM
 {
-    public class ArtistVM:Artist
+    public class ArtistVM
     {
-        //public int Id { get; set; }
-        //public string FirstName { get; set; }
-        //public string LastName { get; set; }
-        //public DateTime CreateDate { get; set; }
-        //public DateTime? UpdateDate { get; set; }
-        //public DateTime? DeleteDate { get; set; }
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int Status { get; set; }
+        public DateTime CreateDate { get; set; }
+        public DateTime? UpdateDate { get; set; }
+        public DateTime? DeleteDate { get; set; }
     }
 }

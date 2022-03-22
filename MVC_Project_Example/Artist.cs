@@ -20,7 +20,6 @@ namespace MVC_Project_Example
             this.Albums = new HashSet<Album>();
             this.Songs = new HashSet<Song>();
         }
-    
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
